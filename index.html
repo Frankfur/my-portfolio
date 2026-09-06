@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Portfolio</title>
 </head>
 
@@ -34,13 +36,16 @@
       <h2>Contact Me</h2>
       <form>
         <label for="name">Your Name</label>
-        <input type="text" id="name" placeholder="Enter your name" required />
+        <input type="text" class = "form-input" id="name" placeholder="Enter your name" required />
 
         <label for="email">Your Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required />
+        <input type="email" class = "form-input" id="email" placeholder="Enter your email" required />
 
-        <label for="message">Message</label>
-        <textarea id="message" placeholder="Any thoughts?"></textarea>
+        <label for="message">Your Message? or Question</label>
+        <textarea class = "form-input" id="message" placeholder="Any thoughts?"></textarea>
+
+        <label for="age">Age</label>
+        <input type="number" class = "form-input" id="age" placeholder="Enter your age" required />
 
         <button type="submit">Send</button>
       </form>
