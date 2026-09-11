@@ -20,16 +20,18 @@ header {
   text-align: center;
 }
 
+/* 导航栏样式,应用了最经典的水平居中布局，工具是flex */
 nav ul {
-  list-style:none;
-  padding:0;
+  list-style: none;
+  padding: 0;
   margin: 10px 0 0 0;
-  text-align: center;
+  display: flex;
+  justify-content: center; /* 让导航栏的链接均匀分布在整个导航栏中 */
+  gap: 15px;
 }
 
 nav ul li {
-  display: inline-block;
-  margin: 0 15px;
+  margin: 0;
 }
 
 nav ul li a {
@@ -39,6 +41,16 @@ nav ul li a {
   padding: 5px 10px;
   border-radius: 4px;/*功能是在按钮上添加圆角，不过我没有看到变化 */
   transition: all 0.3s ease; /* 会让:hover 的颜色变化平滑， all 表示所有属性都变化 */
+}
+
+#home {
+  display:flex;
+  flex-direction:column;
+  align-items:center;  /*在副轴上居中对齐文本*/
+  justify-content:center; /*在主轴上居中对齐*/
+  text-align:center;
+  padding:60px 30px;
+  min-height:400px;
 }
 
 nav ul li a:hover {
@@ -75,9 +87,23 @@ section h2 {
 form {
   display:flex;
   flex-direction:column;
-  justify-content: flex-start
+  justify-content: flex-start;
   gap:10px;
 }
+
+.projects-grid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.project-card {
+  flex: 1 1 250px; /*设置 项目卡片的宽度为 300px。 代码的含义拆解：1 �示项目卡片的宽度占满父元素的宽度，1 示项目卡片的宽度会根据内容自动调整，300px 表示项目卡片的宽度为 300px。其中 1，1，250分别对应意思： */
+  background-color:#f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding:20px;
+} 
 
 label {
   font-weight: bold;
