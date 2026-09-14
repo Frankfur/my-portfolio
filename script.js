@@ -81,11 +81,12 @@ const projects = [
 ];
   // means template literal,意思是模板字面值, 可以在模板字符串中嵌入变量. .join("")是将数组中的元素用空字符串连接起来
   // 用map方法遍历projects数组, 对每个项目数据执行一个函数, 并返回一个新的数组.
+  //留意： => {...}返回多行字符串需要return 关键字来返回值，而隐式返回是 => ... 则直接返回表达式的结果； 
 const projectCardsHTML = projects.map(project => {
   return `
     <article class="project-card">
       <h3>${project.name}</h3>
-      <p>${project.description}</p >
+      <p>${project.description}</p>
     </article>`;
 }).join(""); 
 
@@ -94,4 +95,44 @@ const projectCardsHTML = projects.map(project => {
   container.innerHTML = projectCardsHTML;
 
   console.log("Projects rendered successfully!");
+
+//footer年份不写死. 关注：  if (footerYear) 是defensive programming写法，确保footerYear元素存在时才执行.
+      // 否则会报错, 因为footerYear元素不存在, 无法调用innerHTML属性.
+// ====== 动态更新页脚年份 ======
+const footerYear = document.querySelector("footer p");
+if (footerYear) {
+  const year = new Date().getFullYear();
+  footerYear.innerHTML = `&copy; ${year} My Portfolio. All rights reserved.`;
+};
+
+// ====== 导航链接点击事件 2026-09-14 12:35:59 ======
+  // 为导航链接添加点击事件, 点击后滚动到对应页面.
+const navLinks = document.querySelectorAll('nav ul li a');//选择所有导航链接元素
+
+navLinks.forEach(link => { // 遍历每个导航链接元素
+  link.addEventListener('click', function (e) {//为每个导航链接添加点击事件
+    e.preventDefault(); // 阻止默认行为, 避免跳转到新页面.
+    const targetId = this.getAttribute('href');//获取导航链接的href属性值, 即目标元素的id.
+    const targetSection = document.querySelector(targetId);//根据目标元素的id, 查找对应的元素.
+    targetSection.scrollIntoView({ behavior: 'smooth' });//将目标元素滚动到视口, 并平滑滚动.
+  });
+});
+
+//
+// ========== 表单提交给出提示 2026-09-14 12:41:31==========
+const contactForm = document.querySelector('#contact form');
+
+contactForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const nameValue = document.getElementById('name').value;
+  alert(`谢谢你，${nameValue}！你的消息已收到。`);
+  contactForm.reset();
+});
+
+// ========== 深色模式切换按钮  2026-09-14 14:05:34==========
+const themeToggleBtn = document.getElementById('theme-toggle');//选择深色模式切换按钮元素
+
+themeToggleBtn.addEventListener('click', function () {
+  document.body.classList.toggle('dark-mode'); // 切换深色模式类名, 给body元素添加或移除dark-mode类名.
+});
 
