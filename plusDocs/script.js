@@ -92,9 +92,7 @@ const projectCardsHTML = projects.map(project => {
 
   //选定项目卡片-container元素, 并将项目卡片HTML内容添加到该元素中.
   const container = document.getElementById("project-container");
-  if (container) {
-    container.innerHTML = projectCardsHTML;
-  };
+  container.innerHTML = projectCardsHTML;
 
   console.log("Projects rendered successfully!");
 
@@ -105,62 +103,5 @@ const footerYear = document.querySelector("footer p");
 if (footerYear) {
   const year = new Date().getFullYear();
   footerYear.innerHTML = `&copy; ${year} My Portfolio. All rights reserved.`;
-  console.log("Footer year updated to: " + year);
 };
 
-// ====== 导航链接点击事件 2026-09-14 12:35:59 ======
-  // 为导航链接添加点击事件, 点击后滚动到对应页面.
-const navLinks = document.querySelectorAll('nav ul li a');//选择所有导航链接元素
-
-navLinks.forEach(link => { // 遍历每个导航链接元素
-  link.addEventListener('click', function (e) {//为每个导航链接添加点击事件
-    e.preventDefault(); // 阻止默认行为, 避免跳转到新页面.
-    const targetId = this.getAttribute('href');//获取导航链接的href属性值, 即目标元素的id.
-    const targetSection = document.querySelector(targetId);//根据目标元素的id, 查找对应的元素.
-    targetSection.scrollIntoView({ behavior: 'smooth' });//将目标元素滚动到视口, 并平滑滚动.
-  });
-});
-
-//
-// ========== 表单提交给出提示 2026-09-14 12:41:31========== 
-  // 为联系表单添加提交事件, 提交时阻止默认行为, 并显示提示信息.
-  // 注意：  if (contactForm) 是defensive programming写法，确保contactForm元素存在时才执行.
-      // 否则会报错, 因为contactForm元素不存在, 无法调用addEventListener方法.
-const contactForm = document.querySelector('#contact form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const nameValue = document.getElementById('name').value;
-    alert(`谢谢你，${nameValue}！你的消息已收到。`);
-    contactForm.reset();
-  });
-};
-
-// ========== 深色模式切换按钮  2026-09-14 14:05:34==========
-  // 为深色模式切换按钮添加点击事件, 点击后切换深色模式.
-  // 注意：  if (themeToggleBtn) 是defensive programming写法，确保themeToggleBtn元素存在时才执行.
-      // 否则会报错, 因为themeToggleBtn元素不存在, 无法调用addEventListener方法.
-const themeToggleBtn = document.getElementById('theme-toggle');//选择深色模式切换按钮元素
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', function () {
-    document.body.classList.toggle('dark-mode'); // 切换深色模式类名, 给body元素添加或移除dark-mode类名.
-  });
-};
-
-//重新测试array相关方法
-let numArray = [1, 2, 3, 4, 5];
-
-numArray.push(8);
-console.log(numArray); // [1, 2, 3, 4, 5, 8]
-
-numArray.pop();
-console.log(numArray); // [1, 2, 3, 4, 5]
-
-let addNum = numArray.map(num => num + 1);
-console.log(addNum); // [2, 3, 4, 5, 6]
-
-let filterNum = numArray.filter(num => num % 2 === 0);
-console.log(filterNum); // [2, 4]
-
-let numSum = numArray.reduce((acc, cur) => acc + cur, 0);
-console.log(numSum); // 25
