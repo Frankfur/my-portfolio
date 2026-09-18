@@ -220,3 +220,80 @@ fetchUserDataPromise()
   });
 
 console.log("这行代码依然会先执行");
+
+// ========== fetch+async/await ==========
+//=== 测试fetch ====
+// fetch("https://jsonplaceholder.typicode.com/users/1")
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     console.log("拿到用户数据： ", data);
+//     console.log("用户名： " + data.username);
+//   })
+//   .catch(function (error) {
+//     console.log("请求出错了：", error);
+//   });
+
+// console.log("fetch测试： 这行代码依然会先执行，因为fetch是异步的");
+//=== 测试async/await ====   在vscode,如何临时禁用自动补全功能呢？
+// async function getUserData() {
+//   const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+//   const data = await response.json();
+//   console.log("async/await测试——拿到用户数据： ", data);
+//   console.log("邮件地址： " + data.email);
+// }
+
+// getUserData();
+// console.log(
+//   "async/await测试： 这行代码依然会先执行，因为getUserData内部是异步的",
+// );
+// ========== 测试async/await 报错处理==========
+async function getUserDataSafe() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users/10",
+    );
+    if (!response.ok) {
+      throw new Error(
+        "async/await错误 === 请求失败，状态码：" + response.status,
+      );
+    }
+    const data = await response.json();
+    console.log("async/await错误 === 拿到用户数据： ", data);
+    console.log("async/await错误 === 邮件地址： " + data.email);
+  } catch (error) {
+    console.log("async/await错误 === 请求出错了：", error.message);
+  } finally {
+    console.log("async/await错误 ===（无论成功或失败，都会执行）");
+  }
+}
+getUserDataSafe();
+
+// ========== D11综合练习：渲染真实数据 ==========
+async function renderLatestPosts() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts?_limit=3",
+    );
+    if (!response.ok) {
+      throw new Error("请求失败， 状态码：" + response.status);
+    }
+    const posts = await response.json();
+    const postsHTML = posts
+      .map((post) => {
+        return `
+      <article class="project-card">
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+      </article>
+      `;
+      })
+      .join("");
+    console.log("生成的HTML片段： ", postsHTML);
+  } catch (error) {
+    console.log("渲染失败：", error.message);
+  }
+}
+
+renderLatestPosts();
