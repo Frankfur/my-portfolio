@@ -95,14 +95,14 @@ form {
 }
 /* 作用：设置项目卡片网格的样式，包括布局、换行和间距。 */
 /* 以下是使用flex设置，但更好的布局方式是使用grid布局 2026-09-16 10:03:47， commented out */
-/* .projects-grid {
+/* .project-grid {
   display: flex;
   flex-wrap: wrap; 
   gap: 20px;
 }; */
 
 /* 使用grid布局设置项目卡片网格 2026-09-16 10:03:40 */
-.projects-grid {
+.project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
