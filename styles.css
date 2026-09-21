@@ -56,12 +56,16 @@ nav ul li a {
 }
 /* 作用：设置导航栏链接的悬停样式，包括颜色是#18bc9c 和 背景透明的白色 */
 nav ul li a:hover {
-  color: #299423;
+  color: #18bc9c;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 作用：处理鼠标点击后出现的轮廓线*/
-nav ul li a:focus,
+/* 作用：处理鼠标点击后出现的轮廓线,添加outline, 提升无障碍访问性（键盘导航） 20260920*/
+nav ul li a:focus-visible {
+  outline: 2px solid #c5d606;
+  outline-offset: 2px;
+}
+
 nav ul li a:active {
   outline: none;
 }
@@ -95,18 +99,18 @@ form {
 }
 /* 作用：设置项目卡片网格的样式，包括布局、换行和间距。 */
 /* 以下是使用flex设置，但更好的布局方式是使用grid布局 2026-09-16 10:03:47， commented out */
-/* .project-grid {
-  display: flex;
-  flex-wrap: wrap; 
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-}; */
+}
 
 /* 使用grid布局设置项目卡片网格 2026-09-16 10:03:40 */
-.project-grid {
+/* .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-}
+} */
 
 label {
   font-weight: bold;
@@ -218,11 +222,6 @@ aside h2 {
   }
 }
 /* 作用：设置手机端提交按钮的样式，包括宽度。 */
-@media (max-width: 600px) {
-  button[type="submit"] {
-    width: 100%;
-  }
-}
 @media (max-width: 600px) {
   button[type="submit"] {
     width: 100%;
